@@ -24,7 +24,7 @@ const RouteModel = mongoose.model("Route", routeSchema);
 
 
 
-app.get("/", (req, res) => {
+app.get("/yourAPI", (req, res) => {
     RouteModel.find()
         .then(data => {
             res.send(data);
@@ -39,7 +39,7 @@ const setupRoutes = async () => {
     try {
         const routes = await RouteModel.find();
         routes.forEach(routeData => {
-            app.get(`/api/${routeData.routerName}`, (req, res) => {
+            app.get(`/yourAPI/${routeData.routerName}`, (req, res) => {
                 res.send(routeData.RouteData);
             });
         });
