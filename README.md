@@ -10,14 +10,13 @@ API Manager is a web application that provides a graphical user interface (GUI) 
 - **Post JSON Data:** Users can post JSON data without writing any code, making it easy to configure API routes.
 - **Dynamic Route Setup:** API routes are dynamically configured based on the data posted by users, allowing for flexible and customizable configurations.
 - **MongoDB Integration:** API Manager integrates with MongoDB to store and retrieve route data efficiently.
-
 ## Installation
 
 1. Clone the repository:
 
     ```bash
     git clone <repository_url>
-    ``'
+    ```
 
 2. Install dependencies:
 
@@ -33,9 +32,19 @@ API Manager is a web application that provides a graphical user interface (GUI) 
 
 1. Start the server:
 
-    ```bash
-    node app.js
-    ```
+    - **Linux:**
+    
+        ```bash
+        npm start
+        ```
+
+    - **Windows:**
+    
+        Due to performance issues with nodemon on Windows, it's recommended to use `node` instead of `nodemon` for starting the server. Open `app.js` and replace `nodemon` with `node` in the command below:
+        
+        ```bash
+        node app.js
+        ```
 
 2. Access the application:
 
@@ -45,6 +54,8 @@ API Manager is a web application that provides a graphical user interface (GUI) 
 
     - Post JSON data: Enter the route name and JSON data in the provided fields and submit the form.
     - Configure API routes: The application dynamically sets up API routes based on the data posted by users. Routes can be accessed at `/api/<route_name>`.
+
+
 
 ## Contributing
 
