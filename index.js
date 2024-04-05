@@ -21,6 +21,7 @@ const routeSchema = new mongoose.Schema({
 });
 
 const RouteModel = mongoose.model("Route", routeSchema);
+app.set('view engine', 'ejs');
 
 
 
@@ -65,6 +66,10 @@ app.post("/", async (req, res) => {
         console.error("Error saving data:", error);
         res.status(500).send("Error saving data");
     }
+});
+
+app.get("/home", (req, res) => {
+    res.render('dashboard',{name:"Rahul"});
 });
 
 app.listen(4000, () => {
