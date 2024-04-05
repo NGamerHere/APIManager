@@ -5,9 +5,7 @@ const app=express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
-const ds={
-   name:"datta"
-}
+
 const routing=[];
 
 app.get("/",(req, res)=>{
@@ -17,15 +15,27 @@ app.get("/",(req, res)=>{
    res.send(routing)
 })
 
+const setupRoutes = () => {
+    routing.forEach(routeData => {
+        app.get(`/${routeData.route}`, (req, res) => {
+            res.send(routeData.ds);
+        });
+    });
+};
 
 
 
 app.post("/",(req, res)=>{
+    if (!req.body.route || !req.body.ds) {
+        return res.status(400).send("Invalid data");
+    }
     console.log(req.body.route)
     routing.push(req.body)
-
+    setupRoutes();
   res.send("post request")
 })
+
+
 
 app.listen(4000,()=>{
    console.log("server was started")
