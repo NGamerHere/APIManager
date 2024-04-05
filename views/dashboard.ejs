@@ -1,9 +1,15 @@
 <html lang="en">
  <head>
     <title>hi <%= name%></title>
+     <script>
+        alert('hello, <%= name%>');
+     </script>
  </head>
 <body>
    <h1>hello, <%= name%></h1>
-
+   <form action="/hello" method="post">
+      <input type="text" name="name" placeholder="Enter your name">
+      <button class="mx-10" type="submit">Submit</button>
+   </form>
 </body>
 </html>
