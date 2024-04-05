@@ -4,12 +4,13 @@
      <script>
         alert('hello, <%= name%>');
      </script>
+     <script src="https://cdn.tailwindcss.com"></script>
  </head>
-<body>
-   <h1>hello, <%= name%></h1>
+<body class="m-3">
+   <h1 class="text-xl mb-3">hello, <%= name%></h1>
    <form action="/hello" method="post">
-      <input type="text" name="name" placeholder="Enter your name">
-      <button class="mx-10" type="submit">Submit</button>
+      <input type="text" class="border border-black" name="name" placeholder="Enter your name">
+      <button class="mx-3 border border-black" type="submit" >Submit</button>
    </form>
 </body>
 </html>
