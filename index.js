@@ -22,7 +22,32 @@ const routeSchema = new mongoose.Schema({
 
 const RouteModel = mongoose.model("Route", routeSchema);
 
-// POST route to save route data
+
+
+app.get("/", (req, res) => {
+    RouteModel.find()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            res.status(500).send("Error fetching data");
+        });
+});
+
+const setupRoutes = async () => {
+    try {
+        const routes = await RouteModel.find();
+        routes.forEach(routeData => {
+            app.get(`/api/${routeData.routerName}`, (req, res) => {
+                res.send(routeData.RouteData);
+            });
+        });
+    } catch (error) {
+        console.error("Error setting up routes:", error);
+    }
+};
+
 app.post("/", async (req, res) => {
     try {
         if (!req.body.routerName || !req.body.routeData) {
@@ -34,7 +59,7 @@ app.post("/", async (req, res) => {
             RouteData: data.routeData
         });
         await ds.save();
-        await setupRoutes(); // Refresh routes after saving data
+        await setupRoutes();
         res.send("Data saved");
     } catch (error) {
         console.error("Error saving data:", error);
@@ -42,38 +67,7 @@ app.post("/", async (req, res) => {
     }
 });
 
-// GET route to fetch all route data
-app.get("/", async (req, res) => {
-    try {
-        const routes = await RouteModel.find();
-        res.send(routes);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        res.status(500).send("Error fetching data");
-    }
-});
-
-// Function to dynamically set up routes based on data in the database
-const setupRoutes = async () => {
-    try {
-        const routes = await RouteModel.find();
-        app._router.stack // Clear previous routes
-            .filter(route => route.route)
-            .forEach(route => {
-                app._router.stack.splice(app._router.stack.indexOf(route), 1);
-            });
-
-        routes.forEach(routeData => {
-            app.get(`/api/${routeData.routerName}`, (req, res) => {
-                res.send(routeData.RouteData);
-            });
-        });
-    } catch (error) {
-        console.error("Error setting up routes:", error);
-    }
-};
-
 app.listen(4000, () => {
     console.log("Server started");
-    setupRoutes(); // Initial setup of routes
+    setupRoutes(); // Call setupRoutes after server starts
 });
