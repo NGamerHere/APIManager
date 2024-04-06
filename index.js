@@ -68,11 +68,12 @@ app.post("/", async (req, res) => {
     }
 });
 
-app.get("/home", (req, res) => {
-    res.render('dashboard',{name:"Rahul"});
+app.get("/home", async (req, res) => {
+    const routes = await RouteModel.find();
+    res.render('dashboard',{name:"Rahul",routes:routes});
 });
 
 app.listen(4000, () => {
     console.log("Server started");
-    setupRoutes(); // Call setupRoutes after server starts
+    setupRoutes().then(r => console.log("routes were set up")); // Call setupRoutes after server starts
 });
