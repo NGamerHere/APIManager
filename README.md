@@ -15,7 +15,7 @@ API Manager is a web application that provides a graphical user interface (GUI) 
 1. Clone the repository:
 
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/NGamerHere/APIManager.git
     ```
 
 2. Install dependencies:
