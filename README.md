@@ -67,4 +67,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-This README provides an overview of your API Manager application, including installation instructions, usage guidelines, contribution guidelines, and licensing information. Feel free to customize it further based on your specific requirements and preferences.
