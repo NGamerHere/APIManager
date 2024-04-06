@@ -6,20 +6,20 @@
 </head>
 <body class="m-5">
 <h1 class="text-xl mb-3">hello, <%= name %></h1>
-<form action="/hello" method="post">
-    <input type="text" class="border border-black" name="name" placeholder="Enter your name">
-    <button class="mx-3 border border-black" type="submit">Submit</button>
-</form>
+
 <div>
-    <h2 class="text-xl text-center">Your API is working</h2>
-    <div>
-        <% routes.forEach(item => { %>
-            <div>
-                <h2>Router Name: <%= item.routerName %></h2>
-                <pre><%= JSON.stringify(item.RouteData, null, 2) %></pre>
-            </div>
-        <% }); %>
+    <h2 class="text-xl text-center mb-3">Your API is working</h2>
+    <div class="flex justify-center">
+        <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  gap-2 ">
+            <% routes.forEach(item => { %>
+                <div class="border border-black p-5">
+                    <h2 class="pb-3">API at route  /<%= item.routerName %></h2>
+                    <pre><%= JSON.stringify(item.RouteData, null, 2) %></pre>
+                </div>
+            <% }); %>
+        </div>
     </div>
+
 </div>
 </body>
 </html>
