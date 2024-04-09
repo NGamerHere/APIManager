@@ -1,12 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require('dotenv').config();
+const DB_URL=process.env.DBLINK
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://127.0.0.1:27017/APIMANAGER", {
+mongoose.connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
