@@ -7,6 +7,7 @@ const DB_URL=process.env.DBLINK
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -75,7 +76,7 @@ app.delete("/api/:routerName", async (req, res) => {
         const routerName = req.params.routerName;
         await RouteModel.deleteOne({ routerName });
         await setupRoutes();
-        res.send("Data deleted");
+        res.sendStatus(200);
     } catch (error) {
         console.error("Error deleting data:", error);
         res.status(500).send("Error deleting data");
