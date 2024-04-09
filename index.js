@@ -51,7 +51,7 @@ const setupRoutes = async () => {
     }
 };
 
-app.post("/", async (req, res) => {
+app.post("/api", async (req, res) => {
     try {
         if (!req.body.routerName || !req.body.routeData) {
             return res.status(400).send("Invalid data");
@@ -70,7 +70,19 @@ app.post("/", async (req, res) => {
     }
 });
 
-app.get("/home", async (req, res) => {
+app.delete("/api/:routerName", async (req, res) => {
+    try {
+        const routerName = req.params.routerName;
+        await RouteModel.deleteOne({ routerName });
+        await setupRoutes();
+        res.send("Data deleted");
+    } catch (error) {
+        console.error("Error deleting data:", error);
+        res.status(500).send("Error deleting data");
+    }
+});
+
+app.get("/", async (req, res) => {
     const routes = await RouteModel.find();
     res.render('dashboard',{name:"Rahul",routes:routes});
 });
