@@ -2,12 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require('dotenv').config();
+
 const DB_URL=process.env.DBLINK
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -81,6 +83,10 @@ app.delete("/api/:routerName", async (req, res) => {
         console.error("Error deleting data:", error);
         res.status(500).send("Error deleting data");
     }
+});
+
+app.get("/addNewRoute", (req, res) => {
+    res.render('addNewRoute');
 });
 
 app.get("/", async (req, res) => {
