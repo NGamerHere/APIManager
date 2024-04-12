@@ -33,15 +33,20 @@ app.use(session({
     },
 }));
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World');
-});
+
 
 app.get('/registration', (req: Request, res: Response) => {
     res.render('registration');
 })
 app.get('/login', (req: Request, res: Response) => {
     res.render('login');
+});
+app.get('/logout', (req: Request, res: Response) => {
+  req.session.destroy();
+    res.redirect('/');
+})
+app.get("/", (req: Request, res: Response) => {
+   res.render('home');
 });
 
 app.post('/login',async (req:Request,res:Response)=>{
