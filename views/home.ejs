@@ -11,14 +11,30 @@
 
 <body class="bg-gray-100">
   <div class="m-10 ">
-       <div class="flex flex-row">
-           <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-               <a href="/login">login</a>
-           </button>
-           <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-               <a href="/registration">registration</a>
-           </button>
-       </div>
+
+        <h1 class="text-3xl text-blue-500 mb-5 ml-3">API Manager</h1>
+       <% if (log) {%>
+          <div class="flex flex-row w-32">
+               <h3> hello <%= name %> , you have already logged in</h3>
+              <button class="w-full bg-blue-500 text-white py-2 px-4 mx-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                  <a href="/dashboard">dashboard</a>
+              </button>
+              <button class="w-full bg-blue-500 text-white py-2 px-4 mx-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                  <a href="/logout">logout</a>
+              </button>
+          </div>
+      <% } %>
+      <%if (not) {%>
+          <div class="flex flex-row w-32">
+
+              <button class="w-full bg-blue-500 text-white py-2 px-4 mx-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                  <a href="/login">login</a>
+              </button>
+              <button class="w-full bg-blue-500 text-white py-2 px-4 mx-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                  <a href="/registration">registration</a>
+              </button>
+          </div>
+      <%}%>
   </div>
 </body>
 

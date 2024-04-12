@@ -1,4 +1,3 @@
-
 import express, { Request, Response } from 'express';
 import bodyParser from "body-parser";
 import session from "express-session";
@@ -16,7 +15,8 @@ DBConnector("mongodb://127.0.0.1:27017/tester");
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String
+    password: String,
+    age: Number,
 });
 
 const user=mongoose.model('user',userSchema);
@@ -46,7 +46,10 @@ app.get('/logout', (req: Request, res: Response) => {
     res.redirect('/');
 })
 app.get("/", (req: Request, res: Response) => {
-   res.render('home');
+    if (req.session.user) {
+        res.render('home',{not:true,name:req.session.user.name});
+    }
+   res.render('home',{not:false});
 });
 
 app.post('/login',async (req:Request,res:Response)=>{
@@ -70,7 +73,7 @@ app.get('/dashboard', (req: Request, res: Response) => {
     if (req.session.user) {
         res.render('dashboard',{name: req.session.user.name});
     } else {
-        res.send('You need to login first');
+        res.redirect('/login');
     }
 });
 
