@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import bodyParser from "body-parser";
 import session from "express-session";
-import DBConnector from "./connection.ts";
-import mongoose from "mongoose";
+import DBConnector from "./src/services/connection.ts";
+import user from "./src/models/User.ts";
 import handle404 from "./src/services/Notfound.ts";
 
 const app = express();
@@ -15,14 +15,7 @@ app.set('view engine', 'ejs');
 
 DBConnector("mongodb://127.0.0.1:27017/tester");
 
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    age: Number,
-});
 
-const user=mongoose.model('user',userSchema);
 
 
 app.use(session({
